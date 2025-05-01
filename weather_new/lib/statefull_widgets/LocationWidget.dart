@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:weather_new/statefull_widgets/api_logic.dart';
+import 'package:weather_new/components/api_logic.dart';
 import 'package:weather_new/stateless_widgets/SearchBarWidget.dart';
 
 class LocationWidget extends StatefulWidget {
