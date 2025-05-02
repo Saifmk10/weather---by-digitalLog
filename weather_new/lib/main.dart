@@ -28,7 +28,7 @@ class _WeatherAppState extends State<WeatherApp> {
   // Function to request location permission and fetch coordinates
   Future<void> requestLocationPermission() async {
     try {
-      await geolocatorFetchingData.fecthingCo_ordinates();
+      await geolocatorFetchingData.fetchingUserLocation();
       print("LOCATION PERMISSION GRANTED...");
     } catch (e) {
       print("Error: $e");
