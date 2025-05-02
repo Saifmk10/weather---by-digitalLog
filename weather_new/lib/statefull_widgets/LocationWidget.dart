@@ -1,10 +1,9 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:weather_new/components/api_logic.dart';
+import 'package:weather_new/components/geolocator.dart';
 import 'package:weather_new/stateless_widgets/SearchBarWidget.dart';
 
 class LocationWidget extends StatefulWidget {
@@ -13,9 +12,31 @@ class LocationWidget extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _LocationWidget createState() => _LocationWidget();
+
+
+  
 }
 
 class _LocationWidget extends State<LocationWidget> {
+
+
+  String localArea = '';
+  String city = '';
+
+  GeolocatorFetchingData locationFetcher = GeolocatorFetchingData();
+  @override
+  void initState(){
+    super.initState();
+
+    locationFetcher.fetchingUserLocation().then((_) {
+    setState(() {
+      localArea = locationFetcher.localArea;
+      city = locationFetcher.city;
+    });
+  });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +61,9 @@ class _LocationWidget extends State<LocationWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "CV RAMAN NAGAR",
+                    // this is the variable that is being used for the location
+                    // the var is getting the location from the funnction call happening from line 23 onwards
+                    localArea.isEmpty ? 'Loading...' : localArea,
                     style: GoogleFonts.jura(
                       fontSize: 25,
                       fontWeight: FontWeight.w900,
@@ -48,7 +71,9 @@ class _LocationWidget extends State<LocationWidget> {
                   ),
 
                   Text(
-                    "BENGALURU",
+                    // this is the variable that is being used for the location
+                    // the var is getting the location from the funnction call happening from line 23 onwards
+                    city.isEmpty ? 'Loading...' : city,
                     textAlign: TextAlign.left,
                     style: GoogleFonts.jura(
                       fontSize: 15,
