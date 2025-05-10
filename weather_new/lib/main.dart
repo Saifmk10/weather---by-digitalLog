@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'stateless_widgets/SearchBarWidget.dart';
 import 'statefull_widgets/LocationWidget.dart';
+import 'statefull_widgets/TemperatureWidget.dart';
 import 'components/geolocator.dart';
 
 void main() {
   runApp(WeatherApp());
 }
+
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -16,13 +18,14 @@ class WeatherApp extends StatefulWidget {
 
 class _WeatherAppState extends State<WeatherApp> {
   // Declare an instance of GeolocatorFetchingData
-  late GeolocatorFetchingData geolocatorFetchingData;
+  late GeolocatorFetchingLocation geolocatorFetchingData;
 
   @override
   void initState() {
     super.initState();
-    geolocatorFetchingData = GeolocatorFetchingData();
+    geolocatorFetchingData = GeolocatorFetchingLocation();
     requestLocationPermission(); // Request permission when the app starts
+    
   }
 
   // Function to request location permission and fetch coordinates
@@ -49,7 +52,9 @@ class _WeatherAppState extends State<WeatherApp> {
               SearchBarWidget(),
               SizedBox(height: 30),
               LocationWidget(),
-              SizedBox(height: 40),
+              // SizedBox(height: 0),
+              TemperatureWidget(), 
+              SizedBox(height: 0),
             ],
           ),
         ),
