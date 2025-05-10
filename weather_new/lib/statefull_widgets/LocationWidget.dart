@@ -12,9 +12,6 @@ class LocationWidget extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _LocationWidget createState() => _LocationWidget();
-
-
-  
 }
 
 class _LocationWidget extends State<LocationWidget> {
@@ -23,7 +20,7 @@ class _LocationWidget extends State<LocationWidget> {
   String localArea = '';
   String city = '';
 
-  GeolocatorFetchingData locationFetcher = GeolocatorFetchingData();
+  GeolocatorFetchingLocation locationFetcher = GeolocatorFetchingLocation();
   @override
   void initState(){
     super.initState();
