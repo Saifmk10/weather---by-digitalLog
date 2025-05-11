@@ -6,6 +6,8 @@ import 'package:weather_new/components/geolocator.dart';
 
 final String apiKey = "6d4e97cf96454704ba11f3f30a42078c";
 double? locationTemp;
+double? locationMinTemp;
+double? locationMaxTemp;
 
 
 // this function is created to manage the api call and other methods and features related to the api ONLY for [[SearchBarWidget.dart]]
@@ -53,7 +55,7 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
 // ill make a new function within the geolocator.dart which will return the coordinates and then use a new url and fetch the current location of that 
 
 // lats and longs being fetched 
-Future <double> currentLocationTemp() async{
+Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
   GeolocatorFetchingLocation userCoordinates = GeolocatorFetchingLocation();
 
   await userCoordinates.fetchingUserLocation();
@@ -67,7 +69,8 @@ Future <double> currentLocationTemp() async{
   
 
   final url = Uri.parse(
-    'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey',
+    // 'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey',
+    'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
   );  
 
   final apiResponse = await http.get(url);
@@ -76,10 +79,19 @@ Future <double> currentLocationTemp() async{
   if(apiResponse.statusCode == 200){
     final data = jsonDecode(apiResponse.body);
     locationTemp = (data['data']?[0]['temp'] as num?)?.toDouble() ?? 0.0;
+    locationMinTemp = (data['data']?[0]['min_temp'])?.toDouble() ?? 0.0;
+    locationMaxTemp = (data['data']?[0]['max_temp'])?.toDouble() ?? 0.0;
+    
+    print("MIN TEMP ::: $locationMinTemp");
+    print("MAX TEMP ::: $locationMaxTemp");
   } 
   else{
     print('Failed to fetch data: ${apiResponse.statusCode}');
   }
 
-  return locationTemp;
+  return {
+    'locationTemp' : locationTemp,
+    'locationMinTemp' : locationMinTemp,
+    'locationMaxTemp' : locationMaxTemp,
+  };
 }
