@@ -24,4 +24,4 @@ but the way you see it shouldn’t be.
 
 ## Screenshot
 
-![App Screenshot](iPhone 15 Pro.png)
+![App Screenshot](refImage.png)
