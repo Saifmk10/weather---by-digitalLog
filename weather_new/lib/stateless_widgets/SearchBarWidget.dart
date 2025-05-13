@@ -54,7 +54,8 @@ class SearchBarWidget extends StatelessWidget {
                   // prefixiconcontraints used so that the labeltext will get its own space with the help of box constraints
                   prefixIconConstraints: BoxConstraints(minWidth: 100),
                   labelText: "Search City",
-                  labelStyle: GoogleFonts.jura(
+                  labelStyle: TextStyle(
+                    fontFamily: 'Jura',
                     color: Color(0xFFCCCCCC),
                     fontSize: 20,
                     fontWeight: FontWeight.w300,

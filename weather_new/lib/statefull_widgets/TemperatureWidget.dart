@@ -67,7 +67,8 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                           Text(
                             temp != null ? "${temp!.toInt()}" : "--",
                             // "3",
-                            style: GoogleFonts.jura(
+                            style: TextStyle(
+                              fontFamily: 'Jura',
                               fontSize: 200,
                               fontWeight: FontWeight.w400,
                               height: 0.8,
@@ -91,7 +92,8 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                     child: Text(
                       tempMin != null && tempMax != null?
                       "Today ${tempMin!.toInt()}° - ${tempMax!.toInt()}°":"loading...",
-                      style: GoogleFonts.jura(
+                      style: TextStyle(
+                        fontFamily: 'Jura',
                         fontSize: 25,
                         fontWeight: FontWeight.w400,
                       ),

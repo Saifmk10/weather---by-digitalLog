@@ -61,7 +61,8 @@ class _LocationWidget extends State<LocationWidget> {
                     // this is the variable that is being used for the location
                     // the var is getting the location from the funnction call happening from line 23 onwards
                     localArea.isEmpty ? 'Loading...' : localArea,
-                    style: GoogleFonts.jura(
+                    style: TextStyle(
+                      fontFamily: 'Jura',
                       fontSize: 25,
                       fontWeight: FontWeight.w900,
                     ),
@@ -72,7 +73,8 @@ class _LocationWidget extends State<LocationWidget> {
                     // the var is getting the location from the funnction call happening from line 23 onwards
                     city.isEmpty ? 'Loading...' : city,
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.jura(
+                    style: TextStyle(
+                      fontFamily: 'Jura',
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
