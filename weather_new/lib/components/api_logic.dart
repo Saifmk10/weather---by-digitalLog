@@ -1,10 +1,11 @@
 // ignore: depend_on_referenced_packages
+import 'package:weather_new/api_key.dart'; // the api key is used from this path
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_new/components/geolocator.dart';
 
 
-final String apiKey = "6d4e97cf96454704ba11f3f30a42078c";
+
 double? locationTemp;
 double? locationMinTemp;
 double? locationMaxTemp;
