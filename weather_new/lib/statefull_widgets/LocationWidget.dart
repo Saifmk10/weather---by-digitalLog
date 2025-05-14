@@ -1,3 +1,6 @@
+// ignore: file_names
+// ignore_for_file: unused_import, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +43,7 @@ class _LocationWidget extends State<LocationWidget> {
       padding: EdgeInsets.only(top: 1.0),
       child: Align(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 20, 0, 0),
+          padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -48,7 +51,7 @@ class _LocationWidget extends State<LocationWidget> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SvgPicture.asset(
-                  "assets/location_on.svg",
+                  "assets/appLogo/location_on.svg",
                   height: 60,
                   width: 60,
                 ),

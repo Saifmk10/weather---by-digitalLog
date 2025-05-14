@@ -65,11 +65,25 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - C:\Users\saif\Desktop\WEATHER APP\weather---by-digitalLog\weather_new\assets\search_locations.svg
-    - C:\Users\saif\Desktop\WEATHER APP\weather---by-digitalLog\weather_new\assets\location_on.svg
-    - C:\Users\saif\Desktop\WEATHER APP\weather---by-digitalLog\weather_new\assets\weather-sun.svg
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+    # images for the app logos 
+    - assets/appLogo/location_on.svg
+    - assets/appLogo/search_locations.svg
+
+    # images for the weather forcast
+    - assets/weatherLogo/200-232.svg
+    - assets/weatherLogo/233.svg
+    - assets/weatherLogo/300-302.svg
+    - assets/weatherLogo/500.svg
+    - assets/weatherLogo/501-502.svg
+    - assets/weatherLogo/511-522.svg
+    - assets/weatherLogo/600-602_621-623.svg
+    - assets/weatherLogo/611-612.svg
+    - assets/weatherLogo/700_741-751.svg
+    - assets/weatherLogo/711.svg
+    - assets/weatherLogo/800.svg
+    - assets/weatherLogo/801.svg
+    - assets/weatherLogo/802.svg
+    - assets/weatherLogo/803-804.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
