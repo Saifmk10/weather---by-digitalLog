@@ -8,6 +8,7 @@ final String apiKey = "6d4e97cf96454704ba11f3f30a42078c";
 double? locationTemp;
 double? locationMinTemp;
 double? locationMaxTemp;
+int? weatherLogo;
 
 
 // this function is created to manage the api call and other methods and features related to the api ONLY for [[SearchBarWidget.dart]]
@@ -35,7 +36,7 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
     print("TEMPERATURE : $locationTemp \n");
     print("STATUS : $Stat \n");
     // print(data);
-
+ 
     return{
       'locationTemp': locationTemp,
       'region': Region,
@@ -69,7 +70,6 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
   
 
   final url = Uri.parse(
-    // 'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey',
     'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
   );  
 
@@ -78,9 +78,11 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
 
   if(apiResponse.statusCode == 200){
     final data = jsonDecode(apiResponse.body);
+
     locationTemp = (data['data']?[0]['temp'] as num?)?.toDouble() ?? 0.0;
     locationMinTemp = (data['data']?[0]['min_temp'])?.toDouble() ?? 0.0;
     locationMaxTemp = (data['data']?[0]['max_temp'])?.toDouble() ?? 0.0;
+    weatherLogo = (data['data']?[0]['weather']?['code'])?.toInt() ?? 0;
     
     print("MIN TEMP ::: $locationMinTemp");
     print("MAX TEMP ::: $locationMaxTemp");
@@ -93,5 +95,6 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
     'locationTemp' : locationTemp,
     'locationMinTemp' : locationMinTemp,
     'locationMaxTemp' : locationMaxTemp,
+    'weatherLogo' : weatherLogo,
   };
 }

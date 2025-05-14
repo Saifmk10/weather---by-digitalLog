@@ -1,8 +1,7 @@
-// ignore: depend_on_referenced_packages
+// ignore: file_names
+// ignore_for_file: unused_import, depend_on_referenced_packages
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:flutter_svg/flutter_svg.dart';
-// ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_new/components/api_logic.dart';
 
@@ -45,7 +44,7 @@ class SearchBarWidget extends StatelessWidget {
                   prefixIcon: Padding(
                     padding: EdgeInsets.only(right: 28),
                     child: SvgPicture.asset(
-                      "assets/search_locations.svg",
+                      "assets/appLogo/search_locations.svg",
                       width: 30,
                       height: 30,
                     ),
