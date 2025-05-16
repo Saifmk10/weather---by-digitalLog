@@ -70,26 +70,42 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
 
   
 
-  final url = Uri.parse(
-    'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
+  final currentWeatherUrl = Uri.parse(
+    'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey' ,
   );  
 
-  final apiResponse = await http.get(url);
-  double locationTemp = 0;
+  final forcastWeatherUrl = Uri.parse(
+    'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
+  );
 
-  if(apiResponse.statusCode == 200){
-    final data = jsonDecode(apiResponse.body);
+  final currentWeatherApiResponse = await http.get(currentWeatherUrl);
+  final forcastWeatherApiResponse = await http.get(forcastWeatherUrl);
+
+  double locationTemp = 0;
+ 
+  // 
+  if(currentWeatherApiResponse.statusCode == 200){
+    final data = jsonDecode(currentWeatherApiResponse.body);
 
     locationTemp = (data['data']?[0]['temp'] as num?)?.toDouble() ?? 0.0;
-    locationMinTemp = (data['data']?[0]['min_temp'])?.toDouble() ?? 0.0;
-    locationMaxTemp = (data['data']?[0]['max_temp'])?.toDouble() ?? 0.0;
     weatherLogo = (data['data']?[0]['weather']?['code'])?.toInt() ?? 0;
     
     print("MIN TEMP ::: $locationMinTemp");
     print("MAX TEMP ::: $locationMaxTemp");
   } 
   else{
-    print('Failed to fetch data: ${apiResponse.statusCode}');
+    print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
+  }
+
+  // 
+  if(forcastWeatherApiResponse.statusCode == 200){
+    final data = jsonDecode(forcastWeatherApiResponse.body);
+
+    locationMinTemp = (data['data']?[0]['min_temp'])?.toDouble() ?? 0.0;
+    locationMaxTemp = (data['data']?[0]['max_temp'])?.toDouble() ?? 0.0;
+  }
+  else{
+    print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
   }
 
   return {
