@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_new/components/api_logic.dart';
+import 'package:weather_new/statefull_widgets/LocationWidget.dart';
+
+String? searchedLocation;
 
 class SearchBarWidget extends StatelessWidget {
   // making a callback function that will return the name of the location searched
@@ -32,7 +35,8 @@ class SearchBarWidget extends StatelessWidget {
                 onSubmitted: (String searchedLocation) {
                   print("USER TYPED: $searchedLocation");
                   weatherApiCall(searchedLocation);
-                  // returningSearchedLocation(searchedLocation);
+
+                  // so when i the enter is clicked this function is called for api call.
                 },
 
                 // designign for how the things look when user types something within the field
