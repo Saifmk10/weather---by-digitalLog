@@ -116,7 +116,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
 
 
       default:
-      return 'Some error in function returningWeatherLogo() or no logo fetched';
+      return pathsArray[10];
     }
   }
 
@@ -125,7 +125,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 25, bottom: 10),
+      margin: EdgeInsets.only(left: 25,  top: 1),
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Column(
@@ -139,14 +139,10 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                 children: [
                   Row(
                     children: [
-                      SingleChildScrollView(
-                        
-                      ),
                       Column(
                         children: [
                           Text(
                             temp != null ? "${temp!.toInt()}" : "--",
-                            // "3",
                             style: TextStyle(
                               fontFamily: 'Jura',
                               fontSize: 200,
@@ -162,7 +158,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                       ),
                       // in this we are calling the function directly to get the path of the image asper the weather code provided
                       Flexible(
-                        child: Padding(padding: EdgeInsets.fromLTRB(6,0,0,100), child:SvgPicture.asset(returningWeatherLogo() , width: 120,)) 
+                        child: Padding(padding: EdgeInsets.fromLTRB(3,0,0,100), child:SvgPicture.asset(returningWeatherLogo() , width: 120,)) 
                       )
                        
                     ],
@@ -174,7 +170,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                     left: 13,
                     child: Text(
                       tempMin != null && tempMax != null?
-                      "Today ${tempMin!.toInt()}° - ${tempMax!.toInt()}°":"loading...",
+                      "TODAY ${tempMin!.toInt()}° - ${tempMax!.toInt()}°":"loading...",
                       style: TextStyle(
                         fontFamily: 'Jura',
                         fontSize: 25,

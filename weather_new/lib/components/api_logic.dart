@@ -36,7 +36,6 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
 
     print("TEMPERATURE : $locationTemp \n");
     print("STATUS : $Stat \n");
-    // print(data);
  
     return{
       'locationTemp': locationTemp,
@@ -69,11 +68,12 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
   print("LONGI>>>>> $longitude");
 
   
-
+  // using the current weather url to keep updating the weather realtime [the main temp displayed]
   final currentWeatherUrl = Uri.parse(
     'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey' ,
   );  
 
+  // using the current weather url to show that the weather will be in the present day [today 10 - 20]
   final forcastWeatherUrl = Uri.parse(
     'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
   );

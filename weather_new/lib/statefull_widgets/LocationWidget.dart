@@ -36,6 +36,7 @@ class _LocationWidget extends State<LocationWidget> {
   });
   }
 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _LocationWidget extends State<LocationWidget> {
       padding: EdgeInsets.only(top: 1.0),
       child: Align(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+          padding: EdgeInsets.fromLTRB(15, 30, 0, 0),
 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -67,14 +68,14 @@ class _LocationWidget extends State<LocationWidget> {
                     style: TextStyle(
                       fontFamily: 'Jura',
                       fontSize: 25,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
 
                   Text(
                     // this is the variable that is being used for the location
                     // the var is getting the location from the funnction call happening from line 23 onwards
-                    city.isEmpty ? 'Loading...' : city,
+                    city.isEmpty ? 'Loading...' : city.toUpperCase(),
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontFamily: 'Jura',
