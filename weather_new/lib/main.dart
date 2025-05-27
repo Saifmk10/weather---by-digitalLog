@@ -3,6 +3,7 @@ import 'stateless_widgets/SearchBarWidget.dart';
 import 'statefull_widgets/LocationWidget.dart';
 import 'statefull_widgets/TemperatureWidget.dart';
 import 'statefull_widgets/CommentsPassed.dart';
+import 'statefull_widgets/TodaysWeatherWidget.dart';
 import 'components/geolocator.dart';
 
 void main() {
@@ -39,7 +40,7 @@ class _WeatherAppState extends State<WeatherApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -48,17 +49,26 @@ class _WeatherAppState extends State<WeatherApp> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // SearchBarWidget(returningSearchedLocation: (String) {}),
+                // search bar 
                 SearchBarWidget(),
                 SizedBox(height: 10),
 
+                // location widget [contains the location being fetched from geolocator]
                 LocationWidget(),
                 SizedBox(height: 0),
 
+                // temperature widget [contains the current weather and todays weather]
                 TemperatureWidget(),
                 SizedBox(height: 0),
 
+                // comments passed weather
                 CommentsPassed(),
+                SizedBox(height: 0),
+
+                // todays weather widget
+                // TodaysWeatherWidget(), 
+                // SizedBox(height: 0),
+
               ],
             ),
           ),

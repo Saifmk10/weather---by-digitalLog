@@ -149,15 +149,16 @@ class _CommentsPassed extends State<CommentsPassed> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(40, 30, 10, 0),
+      padding: EdgeInsets.fromLTRB(40, 20, 10, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 300, // or whatever height you want
+            height: 250, // or whatever height you want
             child: SingleChildScrollView(
               child: Text(
-                "$quote",
+                // "$quote",
+                "Clouds above, calm within — peace floats through the gray ",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontFamily: 'Michroma',
