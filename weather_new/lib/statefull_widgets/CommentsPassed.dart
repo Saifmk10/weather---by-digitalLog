@@ -8,6 +8,7 @@ class CommentsPassed extends StatefulWidget {
   const CommentsPassed({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CommentsPassed createState() => _CommentsPassed();
 }
 
@@ -29,9 +30,10 @@ class _CommentsPassed extends State<CommentsPassed> {
 
   // this function is fetching the logo code from the api so that it can be used to get the quotes accordingly
   Future<int?> fetchingLogoCode() async {
+    // ignore: non_constant_identifier_names
     Map<dynamic, dynamic> UserCurrentLocatioMap = await currentLocationTemp();
     int? tempCode = UserCurrentLocatioMap['weatherLogo'];
-    print("LOGO CODE ==::== $tempCode");
+    debugPrint("LOGO CODE ==::== $tempCode");
     return tempCode;
   }
 
@@ -157,8 +159,7 @@ class _CommentsPassed extends State<CommentsPassed> {
             height: 250, // or whatever height you want
             child: SingleChildScrollView(
               child: Text(
-                // "$quote",
-                "Clouds above, calm within — peace floats through the gray ",
+                "$quote",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontFamily: 'Michroma',
