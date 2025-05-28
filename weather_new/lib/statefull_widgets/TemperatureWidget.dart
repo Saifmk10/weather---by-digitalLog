@@ -1,4 +1,3 @@
-// ignore: file_names
 // ignore_for_file: unused_import, depend_on_referenced_packages
 import 'dart:ffi'; // idk y is this added not removing so it doesnt produce any conflict 
 
@@ -14,6 +13,7 @@ class TemperatureWidget extends StatefulWidget {
   const TemperatureWidget({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TemperatureWidget createState() => _TemperatureWidget();
 }
 
@@ -30,6 +30,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
   }
 
   void loadCoordinates() async {
+    // ignore: non_constant_identifier_names
     Map<dynamic, dynamic> UserCurrentLocatioMap = await currentLocationTemp();
 
     double tempFetched = UserCurrentLocatioMap['locationTemp'];
@@ -43,10 +44,10 @@ class _TemperatureWidget extends State<TemperatureWidget> {
       tempMax = tempMaxFetched;
       tempLogo = tempLogoFetched;
 
-      print("TEMPERATURE FETCHED : $temp");
-      print("MIN TEMPERATURE FETCHED : $tempMin");
-      print("MAX TEMPERATURE FETCHED : $tempMax");
-      print("WEATHER CODE FETCHED : $tempLogo");
+      debugPrint("TEMPERATURE FETCHED : $temp");
+      debugPrint("MIN TEMPERATURE FETCHED : $tempMin");
+      debugPrint("MAX TEMPERATURE FETCHED : $tempMax");
+      debugPrint("WEATHER CODE FETCHED : $tempLogo");
     });
   }
 
@@ -55,7 +56,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
 // this function is used to check the weather code provided by the api from the tempLogo variable 
   String returningWeatherLogo(){
     List <String> pathsArray = ['assets/weatherLogo/200-232.svg' ,
-                           'assets/weatherLogo/233.svg',
+                           'assets/weatherLogo/233.svg',  
                            'assets/weatherLogo/300-302.svg',
                            'assets/weatherLogo/500.svg',
                            'assets/weatherLogo/501-502.svg',

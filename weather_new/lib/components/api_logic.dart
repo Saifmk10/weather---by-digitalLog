@@ -16,7 +16,7 @@ int? weatherLogo;
 Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
   // this url is for fetching the location based on user search and is being implemented in the [[SearchBarWidget.dart]]
   final url = Uri.parse(
-    'https://api.weatherbit.io/v2.0/current?key=$apiKey&city=$searchedLocation',
+    'https://api.openweathermap.org/data/2.5/weather?q=$searchedLocation&units=metric&appid=$apiKeyNew',
   );
 
   final apiResponse = await http.get(url);
@@ -26,10 +26,10 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
 
     // print("$data");
 
-    String Region = data['data']?[0]['state_name'] ?? 'NOT FOUND';
-    String Country = data['data']?[0]['country_code'] ?? 'NOT FOUND';
-    double locationTemp = data['data']?[0]['temp'] ?? 0.0;
-    String Stat = data['data']?[0]['weather']?['description'] ?? 'NOT FOUND';
+    String Region = data['name'] ?? 'NOT FOUND';
+    String Country = data['sys']['country'] ?? 'NOT FOUND';
+    double locationTemp = data['main']['temp'] ?? 0.0;
+    String Stat = data['weather'][0]['description'] ?? 'NOT FOUND';
 
     print("STATE : $Region \n");
     print("COUNTRY : $Country \n");
@@ -45,6 +45,8 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
     };
   }
    else {
+    print('STATUS CODE: ${apiResponse.statusCode}');
+    print('RESPONSE BODY: ${apiResponse.body}');
     throw Exception('Failed to fetch weather data');
   }
 }
@@ -70,12 +72,12 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
   
   // using the current weather url to keep updating the weather realtime [the main temp displayed]
   final currentWeatherUrl = Uri.parse(
-    'https://api.weatherbit.io/v2.0/current?lat=$latitude&lon=$longitude&key=$apiKey' ,
+    'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKeyNew&units=metric' ,
   );  
 
-  // using the current weather url to show that the weather will be in the present day [today 10 - 20]
+  // using the current weather url to show that the weather will be in the present day [today 10 - 20] (same url)
   final forcastWeatherUrl = Uri.parse(
-    'https://api.weatherbit.io/v2.0/forecast/daily?lat=$latitude&lon=$longitude&key=$apiKey',
+    'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKeyNew&units=metric',
   );
 
   final currentWeatherApiResponse = await http.get(currentWeatherUrl);
@@ -83,26 +85,30 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
 
   double locationTemp = 0;
  
-  // 
+  // this condition will check if api works and then fetch the data needed or produce the exception for the main temp and the logo code
   if(currentWeatherApiResponse.statusCode == 200){
     final data = jsonDecode(currentWeatherApiResponse.body);
 
-    locationTemp = (data['data']?[0]['temp'] as num?)?.toDouble() ?? 0.0;
-    weatherLogo = (data['data']?[0]['weather']?['code'])?.toInt() ?? 0;
+    locationTemp = (data['main']['temp'] as num?)?.toDouble() ?? 0.0;
+    weatherLogo = (data['weather']?[0]['id']) ?? 0;
     
-    print("MIN TEMP ::: $locationMinTemp");
-    print("MAX TEMP ::: $locationMaxTemp");
+    print("TEMPERATURE NEW API ::: $locationTemp");
+    print("WEATHER CODE NEW API ::: $weatherLogo");
+    
+    
   } 
   else{
     print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
   }
 
-  // 
+  // this condition will check if api works and then fetch the data needed or produce the exception for the todays temp
   if(forcastWeatherApiResponse.statusCode == 200){
     final data = jsonDecode(forcastWeatherApiResponse.body);
 
-    locationMinTemp = (data['data']?[0]['min_temp'])?.toDouble() ?? 0.0;
-    locationMaxTemp = (data['data']?[0]['max_temp'])?.toDouble() ?? 0.0;
+    locationMinTemp = (data['main']['temp_min'])?.toDouble() ?? 0.0;
+    locationMaxTemp = (data['main']['temp_max'])?.toDouble() ?? 0.0;
+    print("MIN TEMP ::: $locationMinTemp");
+    print("MAX TEMP ::: $locationMaxTemp");
   }
   else{
     print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
