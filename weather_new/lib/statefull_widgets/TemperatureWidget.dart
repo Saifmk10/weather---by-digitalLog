@@ -1,5 +1,5 @@
 // ignore_for_file: unused_import, depend_on_referenced_packages
-import 'dart:ffi'; // idk y is this added not removing so it doesnt produce any conflict 
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:weather_new/components/api_logic.dart';
 import 'package:weather_new/components/geolocator.dart';
+
+import 'package:weather_new/statefull_widgets/SearchBarWidget.dart';
 
 class TemperatureWidget extends StatefulWidget {
   const TemperatureWidget({super.key});
@@ -23,13 +25,51 @@ class _TemperatureWidget extends State<TemperatureWidget> {
   double? tempMax;
   int? tempLogo;
 
+
   @override
   void initState() {
     super.initState();
-    loadCoordinates();
+
+    // this is a event listener that is going to check if the checker is set to true or false , if flase then itll show temp for 
+    //user location and if true it will show the temp for user searched location
+    checker.addListener((){
+      // if(checker.value == false){
+      //   loadCoordinatesTemp();
+      // }
+      // else{
+      //   loadUserSearchedLocation();
+      // }
+
+       if(checker.value == true){
+         loadUserSearchedLocation();
+      }
+      // else{
+      //   loadCoordinatesTemp();
+      // }
+      
+       
+      
+    
+  
+    });
+
+    // if(checker.value == false){
+    //   loadCoordinatesTemp();
+    // }
+    // else{
+    //   loadUserSearchedLocation();
+    // }
+
+     if(Statuscode == 400){
+        loadCoordinatesTemp();
+      } // doesnt work for now
+   
+
+
   }
 
-  void loadCoordinates() async {
+  // this fucntion will load the temp of the user location
+  void loadCoordinatesTemp() async {
     // ignore: non_constant_identifier_names
     Map<dynamic, dynamic> UserCurrentLocatioMap = await currentLocationTemp();
 
@@ -44,6 +84,29 @@ class _TemperatureWidget extends State<TemperatureWidget> {
       tempMax = tempMaxFetched;
       tempLogo = tempLogoFetched;
 
+      debugPrint("FROM THE CO-ORDINATES");
+      debugPrint("CHECKER IS SET TO : $checker");
+      debugPrint("TEMPERATURE FETCHED : $temp");
+      debugPrint("MIN TEMPERATURE FETCHED : $tempMin");
+      debugPrint("MAX TEMPERATURE FETCHED : $tempMax");
+      debugPrint("WEATHER CODE FETCHED : $tempLogo");
+    });
+  }
+
+  // this will show the temp of the user searched location
+  void loadUserSearchedLocation() async{
+    
+    Map<dynamic, dynamic>? userSearchedLocationWeatherMap = await userSearchedLocationWeather(searchedLocation);
+
+
+    double searchedLocationtemp = userSearchedLocationWeatherMap['locationTemp'];
+    int searchedLocationCode = userSearchedLocationWeatherMap['code'];
+
+    setState(() {
+      temp = searchedLocationtemp;
+      tempLogo = searchedLocationCode;
+
+      debugPrint("FROM THE SEARCHED LOCATION");
       debugPrint("TEMPERATURE FETCHED : $temp");
       debugPrint("MIN TEMPERATURE FETCHED : $tempMin");
       debugPrint("MAX TEMPERATURE FETCHED : $tempMax");

@@ -6,19 +6,28 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_new/components/api_logic.dart';
 import 'package:weather_new/statefull_widgets/LocationWidget.dart';
 
-String? searchedLocation;
+String searchedLocation = '';
+ValueNotifier<bool> checker = ValueNotifier(false);
 
-class SearchBarWidget extends StatelessWidget {
-  // making a callback function that will return the name of the location searched
-  // final Function(String) returningSearchedLocation;
-
+class SearchBarWidget extends StatefulWidget{
   const SearchBarWidget({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
+  _SearchBarWidget createState() => _SearchBarWidget();
+}
+
+
+
+class _SearchBarWidget extends State<SearchBarWidget> {
+  
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         FocusScope.of(context).unfocus();
+        
       },
 
       child: Align(
@@ -31,12 +40,16 @@ class SearchBarWidget extends StatelessWidget {
               width: 300,
 
               child: TextField(
-                // the api is being called here
-                onSubmitted: (String searchedLocation) {
-                  print("USER TYPED: $searchedLocation");
-                  weatherApiCall(searchedLocation);
 
-                  // so when i the enter is clicked this function is called for api call.
+                
+                // the api is being called here
+                onSubmitted: (String input ) {
+
+                  debugPrint("USER TYPED: $input");
+                  searchedLocation = Uri.encodeComponent(input);
+                  checker.value = true;
+                  // checker.value = !checker.value; 
+                  
                 },
 
                 // designign for how the things look when user types something within the field
@@ -57,6 +70,7 @@ class SearchBarWidget extends StatelessWidget {
                   // prefixiconcontraints used so that the labeltext will get its own space with the help of box constraints
                   prefixIconConstraints: BoxConstraints(minWidth: 100),
                   labelText: "Search City",
+                  
                   labelStyle: TextStyle(
                     fontFamily: 'Jura',
                     color: Color(0xFFCCCCCC),

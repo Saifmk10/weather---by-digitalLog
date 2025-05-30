@@ -10,10 +10,11 @@ double? locationTemp;
 double? locationMinTemp;
 double? locationMaxTemp;
 int? weatherLogo;
+int? Statuscode;
 
 
 // this function is created to manage the api call and other methods and features related to the api ONLY for [[SearchBarWidget.dart]]
-Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
+Future <Map<dynamic , dynamic>> userSearchedLocationWeather(String searchedLocation) async {
   // this url is for fetching the location based on user search and is being implemented in the [[SearchBarWidget.dart]]
   final url = Uri.parse(
     'https://api.openweathermap.org/data/2.5/weather?q=$searchedLocation&units=metric&appid=$apiKeyNew',
@@ -24,30 +25,36 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
   if (apiResponse.statusCode == 200) {
     final data = jsonDecode(apiResponse.body);
 
-    // print("$data");
 
     String Region = data['name'] ?? 'NOT FOUND';
     String Country = data['sys']['country'] ?? 'NOT FOUND';
     double locationTemp = data['main']['temp'] ?? 0.0;
-    String Stat = data['weather'][0]['description'] ?? 'NOT FOUND';
+    int code = data['weather'][0]['id'] ?? 000;
 
     print("STATE : $Region \n");
     print("COUNTRY : $Country \n");
 
     print("TEMPERATURE : $locationTemp \n");
-    print("STATUS : $Stat \n");
+    print("STATUS : $code \n");
  
     return{
       'locationTemp': locationTemp,
       'region': Region,
       'country' : Country,
-      'stat' : Stat,
+      'code' : code,
     };
   }
    else {
     print('STATUS CODE: ${apiResponse.statusCode}');
     print('RESPONSE BODY: ${apiResponse.body}');
+
+    Statuscode = apiResponse.statusCode;
     throw Exception('Failed to fetch weather data');
+
+    
+    
+
+
   }
 }
 
@@ -55,9 +62,8 @@ Future <Map<dynamic , dynamic>> weatherApiCall(String searchedLocation) async {
 
 
 
-// ill make a new function within the geolocator.dart which will return the coordinates and then use a new url and fetch the current location of that 
 
-// lats and longs being fetched 
+// this dunction will fetch the location of the user with the help of geo locator and geocoding.
 Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
   GeolocatorFetchingLocation userCoordinates = GeolocatorFetchingLocation();
 
@@ -114,7 +120,7 @@ Future<Map<dynamic , dynamic>>  currentLocationTemp() async{
     print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
   }
 
-  return {
+  return { 
     'locationTemp' : locationTemp,
     'locationMinTemp' : locationMinTemp,
     'locationMaxTemp' : locationMaxTemp,
