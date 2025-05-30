@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'stateless_widgets/SearchBarWidget.dart';
+import 'statefull_widgets/SearchBarWidget.dart';
 import 'statefull_widgets/LocationWidget.dart';
 import 'statefull_widgets/TemperatureWidget.dart';
 import 'statefull_widgets/CommentsPassed.dart';
@@ -66,8 +66,8 @@ class _WeatherAppState extends State<WeatherApp> {
                 SizedBox(height: 0),
 
                 // todays weather widget
-                // TodaysWeatherWidget(), 
-                // SizedBox(height: 0),
+                TodaysWeatherWidget(), 
+                SizedBox(height: 0),
 
               ],
             ),
