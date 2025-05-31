@@ -13,7 +13,7 @@ class CommentsPassed extends StatefulWidget {
 }
 
 class _CommentsPassed extends State<CommentsPassed> {
-  String? quote;
+  String quote = 'Hope your having a greate day ;)';
 
   @override
   void initState() {
