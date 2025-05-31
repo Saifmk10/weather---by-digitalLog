@@ -48,7 +48,7 @@ class _SearchBarWidget extends State<SearchBarWidget> {
                   debugPrint("USER TYPED: $input");
                   searchedLocation = Uri.encodeComponent(input);
                   checker.value = true;
-                  // checker.value = !checker.value; 
+                  checker.value = !checker.value; 
                   
                 },
 

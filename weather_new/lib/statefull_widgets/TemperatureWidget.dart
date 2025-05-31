@@ -53,9 +53,9 @@ class _TemperatureWidget extends State<TemperatureWidget> {
   
     });
 
-    // if(checker.value == false){
-    //   loadCoordinatesTemp();
-    // }
+    if(checker.value == false){
+      loadCoordinatesTemp();
+    }
     // else{
     //   loadUserSearchedLocation();
     // }
@@ -131,7 +131,8 @@ class _TemperatureWidget extends State<TemperatureWidget> {
                            'assets/weatherLogo/800.svg',
                            'assets/weatherLogo/801.svg',
                            'assets/weatherLogo/802.svg',
-                           'assets/weatherLogo/803-804.svg'
+                           'assets/weatherLogo/803-804.svg',
+                           'assets/weatherLogo/smiley-default.svg'
                            ];
 
     
@@ -180,7 +181,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
 
 
       default:
-      return pathsArray[10];
+      return pathsArray[14];
     }
   }
 

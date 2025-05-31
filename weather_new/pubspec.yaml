@@ -84,6 +84,7 @@ flutter:
     - assets/weatherLogo/801.svg
     - assets/weatherLogo/802.svg
     - assets/weatherLogo/803-804.svg
+    - assets/weatherLogo/smiley-default.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
