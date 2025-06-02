@@ -73,9 +73,9 @@ class _TemperatureWidget extends State<TemperatureWidget> {
     // ignore: non_constant_identifier_names
     Map<dynamic, dynamic> UserCurrentLocatioMap = await currentLocationTemp();
 
-    double tempFetched = UserCurrentLocatioMap['locationTemp'];
-    double tempMinFetched = UserCurrentLocatioMap['locationMinTemp'];
-    double tempMaxFetched = UserCurrentLocatioMap['locationMaxTemp'];
+    double tempFetched = UserCurrentLocatioMap['locationTemp'] ?? 0.0;
+    double tempMinFetched = UserCurrentLocatioMap['locationMinTemp'] ?? 0.0;
+    double tempMaxFetched = UserCurrentLocatioMap['locationMaxTemp'] ?? 0.0;
     int tempLogoFetched = UserCurrentLocatioMap['weatherLogo'];
 
     setState(() {
@@ -97,7 +97,7 @@ class _TemperatureWidget extends State<TemperatureWidget> {
   void loadUserSearchedLocation() async{
     
     Map<dynamic, dynamic>? userSearchedLocationWeatherMap = await userSearchedLocationWeather(searchedLocation);
-
+    
 
     double searchedLocationtemp = userSearchedLocationWeatherMap['locationTemp'];
     int searchedLocationCode = userSearchedLocationWeatherMap['code'];
