@@ -9,6 +9,7 @@ import 'package:weather_new/components/api_logic.dart';
 import 'package:weather_new/components/geolocator.dart';
 import 'package:weather_new/statefull_widgets/SearchBarWidget.dart';
 
+
 class LocationWidget extends StatefulWidget {
   const LocationWidget({super.key});
 
@@ -19,24 +20,38 @@ class LocationWidget extends StatefulWidget {
 
 class _LocationWidget extends State<LocationWidget> {
 
-
-  String localArea = '';
   String city = '';
+  String country = '';
+  String region = '';
+
 
   GeolocatorFetchingLocation locationFetcher = GeolocatorFetchingLocation();
   @override
-  void initState(){
+  void initState() {
     super.initState();
 
-    locationFetcher.fetchingUserLocation().then((_) {
-    setState(() {
-      localArea = locationFetcher.localArea;
-      city = locationFetcher.city;
-    });
-  });
-  }
+    checker.addListener(() {
+      if (checker.value == true) {
 
-  
+        userSearchedLocationWeather(searchedLocation).then((userSearchedLocationWeatherMap){
+          setState(() {
+            country = userSearchedLocationWeatherMap['country'];
+            city = userSearchedLocationWeatherMap['region'];
+          });
+        });
+      }            
+    });
+
+    if (checker.value == false){
+      locationFetcher.fetchingUserLocation().then((_) {
+          setState(() {
+            country = locationFetcher.localArea;
+            city = locationFetcher.city;
+          });
+        });
+    }
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +73,14 @@ class _LocationWidget extends State<LocationWidget> {
                 ),
               ),
 
-              Column(
+              Column( 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  
                   Text(
                     // this is the variable that is being used for the location
                     // the var is getting the location from the funnction call happening from line 23 onwards
-                    localArea.isEmpty ? 'Loading...' : localArea,
+                    city.isEmpty ? 'Loading...' : city.toUpperCase(),
                     style: TextStyle(
                       fontFamily: 'Jura',
                       fontSize: 25,
@@ -75,7 +91,7 @@ class _LocationWidget extends State<LocationWidget> {
                   Text(
                     // this is the variable that is being used for the location
                     // the var is getting the location from the funnction call happening from line 23 onwards
-                    city.isEmpty ? 'Loading...' : city.toUpperCase(),
+                    country.isEmpty ? 'Loading...' :  country,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontFamily: 'Jura',

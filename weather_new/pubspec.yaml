@@ -68,6 +68,7 @@ flutter:
     # images for the app logos 
     - assets/appLogo/location_on.svg
     - assets/appLogo/search_locations.svg
+    - assets/appLogo/sun_uvIndex.svg
 
     # images for the weather forcast
     - assets/weatherLogo/200-232.svg
