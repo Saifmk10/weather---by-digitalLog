@@ -73,7 +73,7 @@ class _WeatherAppState extends State<WeatherApp> {
                 // SizedBox(height: 0),
 
                 
-                // MoreDetailsWidget(),
+                MoreDetailsWidget(),
 
 
 
