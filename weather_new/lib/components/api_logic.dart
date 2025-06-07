@@ -10,6 +10,15 @@ double? locationMaxTemp;
 int? weatherLogo;
 int? Statuscode;
 
+
+
+
+
+
+
+
+
+
 // this function is created to manage the api call and other methods and features related to the api ONLY for [[SearchBarWidget.dart]]
 Future<Map<dynamic, dynamic>> userSearchedLocationWeather(
   String searchedLocation,
@@ -49,6 +58,15 @@ Future<Map<dynamic, dynamic>> userSearchedLocationWeather(
     throw Exception('Failed to fetch weather data');
   }
 }
+
+
+
+
+
+
+
+
+
 
 // this dunction will fetch the location of the user with the help of geo locator and geocoding.
 Future<Map<dynamic, dynamic>> currentLocationTemp() async {
