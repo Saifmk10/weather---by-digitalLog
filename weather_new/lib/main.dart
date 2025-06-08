@@ -3,7 +3,7 @@ import 'statefull_widgets/SearchBarWidget.dart';
 import 'statefull_widgets/LocationWidget.dart';
 import 'statefull_widgets/TemperatureWidget.dart';
 import 'statefull_widgets/CommentsPassed.dart';
-// import 'statefull_widgets/TodaysWeatherWidget.dart';
+import 'statefull_widgets/TodaysWeatherWidget.dart';
 import 'statefull_widgets/MoreDetailsWidget.dart';
 import 'components/geolocator.dart';
 
@@ -66,15 +66,13 @@ class _WeatherAppState extends State<WeatherApp> {
                 CommentsPassed(),
                 SizedBox(height: 0),
 
-                // COMING SOON
-
-                // todays weather widget
-                // TodaysWeatherWidget(), 
-                // SizedBox(height: 0),
-
                 
+                // more details about the weather
                 MoreDetailsWidget(),
 
+                // COMING SOON
+                // TodaysWeatherWidget(), 
+                // SizedBox(height: 0),
 
 
               ],

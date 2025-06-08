@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_new/components/api_logic.dart';
 
 class MoreDetailsWidget extends StatefulWidget {
   const MoreDetailsWidget({super.key});
@@ -9,6 +12,50 @@ class MoreDetailsWidget extends StatefulWidget {
 }
 
 class _MoreDetailsWidget extends State<MoreDetailsWidget> {
+  int? airPressure;
+  double? feelsLike;
+  int? humidity;
+  int? windDirection;
+  double? windSpeed;
+  int? visibility;
+
+  void initState(){
+    super.initState();
+    loadMoreWeatherDetails();
+  }
+
+  void loadMoreWeatherDetails () async {
+    Map<dynamic , dynamic> fetchingMoreWeatherDetails = await currentLocationTemp();
+    int airPressureFetched = fetchingMoreWeatherDetails['airPressure'];
+    double feelsLikeFetched = fetchingMoreWeatherDetails['feelsLike'];
+    int humidityFetched = fetchingMoreWeatherDetails['humidity'];
+    int windDirectionFetched = fetchingMoreWeatherDetails['windDirection'];
+    double windSpeedFetched = fetchingMoreWeatherDetails['windSpeed'];
+    int visibilityFetched = fetchingMoreWeatherDetails['visibility'];
+
+
+    setState(() {
+      airPressure = airPressureFetched;
+      feelsLike = feelsLikeFetched;
+      humidity = humidityFetched;
+      windDirection = windDirectionFetched;
+      windSpeed = windSpeedFetched;
+      visibility = visibilityFetched;
+
+      debugPrint("FROM THE MOREDETAILSWIDGET :");
+      debugPrint("VISIBILITY ::: $visibility");
+      debugPrint("WIND SPEED ::: $windSpeed");
+      debugPrint("WIND DIRECTION ::: $windDirection");
+      debugPrint("HUMIDITY ::: $humidity");
+      debugPrint("FEELS LIKE ::: $feelsLike");
+      debugPrint("PRESSURE ::: $airPressure");
+    });
+  }
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,7 +93,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: SvgPicture.asset(
-                          "assets/appLogo/sun_uvIndex.svg",
+                          "assets/appLogo/pressure_icon.svg",
                           width: 40,
                           height: 40,
                         ),
@@ -54,12 +101,12 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("UV" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w800, fontSize: 18),),
+                        child: Text("Pressure" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w800, fontSize: 18),),
                       ),
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("9 strong" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text("$airPressure hPa" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
@@ -105,7 +152,8 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("29°c" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        // not converted to int wantedly 
+                        child: Text("$feelsLike°c" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
@@ -155,7 +203,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("81%" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text("$humidity%" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
@@ -200,7 +248,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("180°" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text("$windDirection°" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
@@ -248,7 +296,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("20 m/s" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text("$windSpeed m/s" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
@@ -293,7 +341,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("16km" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text("$visibility m" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),

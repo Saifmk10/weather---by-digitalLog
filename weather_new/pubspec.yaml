@@ -76,6 +76,7 @@ flutter:
     - assets/appLogo/wind_direction.svg
     - assets/appLogo/visibility_eye.svg
     - assets/appLogo/humidity_drop.svg
+    - assets/appLogo/pressure_icon.svg
 
     # images for the weather forcast
     - assets/weatherLogo/200-232.svg

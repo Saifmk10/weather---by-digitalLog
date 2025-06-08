@@ -9,6 +9,12 @@ double? locationMinTemp;
 double? locationMaxTemp;
 int? weatherLogo;
 int? Statuscode;
+int? airPressure;
+double? feelsLike;
+int? humidity;
+int? windDirection;
+double? windSpeed;
+int? visibility;
 
 
 
@@ -51,8 +57,8 @@ Future<Map<dynamic, dynamic>> userSearchedLocationWeather(
       'code': code,
     };
   } else {
-    print('STATUS CODE: ${apiResponse.statusCode}');
-    print('RESPONSE BODY: ${apiResponse.body}');
+    // print('STATUS CODE: ${apiResponse.statusCode}');
+    // print('RESPONSE BODY: ${apiResponse.body}');
 
     Statuscode = apiResponse.statusCode;
     throw Exception('Failed to fetch weather data');
@@ -103,8 +109,21 @@ Future<Map<dynamic, dynamic>> currentLocationTemp() async {
     locationTemp = (data['main']['temp'] as num?)?.toDouble() ?? 0.0;
     weatherLogo = (data['weather']?[0]['id']) ?? 0;
 
-    print("TEMPERATURE NEW API ::: $locationTemp");
-    print("WEATHER CODE NEW API ::: $weatherLogo");
+    // this bellow code will provide the data for the [MoreDetailsWidget.dart]
+    humidity = (data['main']['humidity']) ?? 0.0;
+    feelsLike = (data['main']['feels_like'])?? 0.0;
+    windSpeed = (data['wind']['speed'])?? 0.0;
+    windDirection = (data['wind']['deg'])?? 0;
+    visibility = (data['visibility']) ?? 0;
+    airPressure = (data['main']['pressure']) ?? 0;
+    
+    // print("VISIBILITY ::: $visibility");
+    // print("WIND SPEED ::: $windSpeed");
+    // print("WIND DIRECTION ::: $windDirection");
+    // print("HUMIDITY ::: $humidity");
+    // print("FEELS LIKE ::: $feelsLike");
+    // print("TEMPERATURE NEW API ::: $locationTemp");
+    // print("WEATHER CODE NEW API ::: $weatherLogo");
   } else {
     print('Failed to fetch data: ${currentWeatherApiResponse.statusCode}');
   }
@@ -147,5 +166,11 @@ Future<Map<dynamic, dynamic>> currentLocationTemp() async {
     'locationMinTemp': locationMinTemp,
     'locationMaxTemp': locationMaxTemp,
     'weatherLogo': weatherLogo,
+    'airPressure' : airPressure, 
+    'feelsLike' : feelsLike,
+    'humidity' : humidity,
+    'windDirection' : windDirection,
+    'windSpeed' : windSpeed,
+    'visibility' : visibility
   };
 }
