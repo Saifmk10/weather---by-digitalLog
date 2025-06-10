@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'statefull_widgets/SearchBarWidget.dart';
 import 'statefull_widgets/LocationWidget.dart';
@@ -19,6 +21,8 @@ class WeatherApp extends StatefulWidget {
 }
 
 class _WeatherAppState extends State<WeatherApp> {
+  Key refreshKey = UniqueKey();
+
   // Declare an instance of GeolocatorFetchingData
   late GeolocatorFetchingLocation geolocatorFetchingData;
 
@@ -33,52 +37,68 @@ class _WeatherAppState extends State<WeatherApp> {
   Future<void> requestLocationPermission() async {
     try {
       await geolocatorFetchingData.fetchingUserLocation();
-      print("LOCATION PERMISSION GRANTED...");
+      debugPrint("LOCATION PERMISSION GRANTED...");
     } catch (e) {
-      print("Error: $e");
+      debugPrint("Error: $e");
       // Handle permission denial or errors here (could show an alert to the user)
+    }
+  }
+
+
+  Future<void> _handleRefresh() async {
+    debugPrint("Pull-to-refresh triggered");
+
+    try {
+      setState(() {
+        refreshKey = UniqueKey();
+      });
+      debugPrint("Data refreshed successfully.");
+    } catch (e) {
+      debugPrint("Error during refresh: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) { 
     return MaterialApp(
+      key: refreshKey ,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color(0xFFCCCCCC),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                // search bar 
-                SearchBarWidget(),
-                SizedBox(height: 10),
-
-                // location widget [contains the location being fetched from geolocator]
-                LocationWidget(),
-                SizedBox(height: 0),
-
-                // temperature widget [contains the current weather and todays weather]
-                TemperatureWidget(),
-                SizedBox(height: 0),
-
-                // comments passed weather
-                CommentsPassed(),
-                SizedBox(height: 0),
-
-                
-                // more details about the weather
-                MoreDetailsWidget(),
-
-                // COMING SOON
-                // TodaysWeatherWidget(), 
-                // SizedBox(height: 0),
+  child: RefreshIndicator(
+    onRefresh: _handleRefresh,
+    child: SingleChildScrollView(
+      physics: AlwaysScrollableScrollPhysics(), // this makes sure it can always pull even if content is small
+      child: Column(
+        children: [
+          SearchBarWidget(),
+          SizedBox(height: 10),
 
 
-              ],
-            ),
-          ),
-        ),
+          LocationWidget(),
+          SizedBox(height: 0),
+
+
+          TemperatureWidget(),
+          SizedBox(height: 0),
+
+
+          CommentsPassed(),
+          SizedBox(height: 0),
+
+
+          MoreDetailsWidget(),
+
+          SizedBox(
+            child: Text('Developed by SaifMK'),
+          )
+        ],
+      ),
+    ),
+  ),
+),
+
       ),
     );
   }

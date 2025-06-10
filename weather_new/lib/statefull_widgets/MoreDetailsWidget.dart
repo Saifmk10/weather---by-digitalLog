@@ -203,7 +203,7 @@ class _MoreDetailsWidget extends State<MoreDetailsWidget> {
 
                       Align(
                         alignment: Alignment.topLeft,
-                        child: Text("$humidity%" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
+                        child: Text(humidity != null ?"$humidity%" : "--" , style: TextStyle(fontFamily: 'Jura', fontWeight: FontWeight.w900, fontSize: 18 ),),
                       )
                     ],
                   ),
