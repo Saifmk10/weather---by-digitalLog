@@ -1,0 +1,12 @@
+flutter_native_splash:
+  color: "#FF0000"
+  # Uncomment the next line to show an image instead of just a background color
+  # image: assets/appLogo/loading_page_logo.jpg
+  android: true
+  ios: true
+  fullscreen: true
+
+  android_12:
+    color: "#CCCCCC"
+    image: assets/appLogo/loading_page.png
+    branding: assets/appLogo/footer_logo.png
