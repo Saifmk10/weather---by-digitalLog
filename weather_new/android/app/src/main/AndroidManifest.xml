@@ -6,7 +6,7 @@
 
 
     <application
-        android:label="weather_new"
+        android:label="AeroCast"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
