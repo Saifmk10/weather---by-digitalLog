@@ -20,6 +20,16 @@ class SearchBarWidget extends StatefulWidget{
 
 
 class _SearchBarWidget extends State<SearchBarWidget> {
+
+  void showSnackBar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 5),
+      backgroundColor: Color.fromARGB(255, 6, 6, 6),
+    ),
+  );
+}
   
   @override
   Widget build(BuildContext context) {
@@ -45,8 +55,10 @@ class _SearchBarWidget extends State<SearchBarWidget> {
                 // the api is being called here
                 onSubmitted: (String input ) {
 
+                  showSnackBar(context, "App displays only the current weather for searched location and not more details.\n UPDATE COMING SOON...");
+
                   debugPrint("USER TYPED: $input");
-                  searchedLocation = Uri.encodeComponent(input);
+                  searchedLocation = Uri.encodeComponent(input.trim());
                   checker.value = true;
                   checker.value = !checker.value; 
                   
