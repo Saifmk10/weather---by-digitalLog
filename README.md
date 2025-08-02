@@ -25,3 +25,6 @@ but the way you see it shouldn’t be.
 ## Screenshot
 
 ![App Screenshot](refImage.png)
+
+## TEST THE APP NOW 
+[**Click here to test the app**](https://saifmk.website/AeroCast_case_study.html)
